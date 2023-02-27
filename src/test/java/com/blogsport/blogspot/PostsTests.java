@@ -1,25 +1,53 @@
 package com.blogsport.blogspot;
 
-import org.hamcrest.Matchers;
+import com.blogsport.blogspot.controllers.Posts;
+import com.blogsport.blogspot.entity.Post;
+import com.blogsport.blogspot.services.PostService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.matchers.Matches;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import java.util.ArrayList;
+import java.util.List;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
-@WebMvcTest
+@ExtendWith(MockitoExtension.class)
 public class PostsTests {
-    @Autowired
-    private MockMvc mockMvc;
+
+    @InjectMocks
+    Posts posts;
+
+    @Mock
+    PostService postService;
 
     @Test
-    void helloResponseString() throws Exception {
-        this.mockMvc.perform(get("/posts/hello"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(Matchers.equalTo("Hello Tester")));
+    @DisplayName("Testing sayHelloController")
+    void sayHelloController() {
+        String result = posts.sayHello();
+
+        assertThat(result).isEqualTo("Hello Tester");
     }
+
+
+    @Test
+    @DisplayName("Testing getPostsController")
+    void getPostsController() {
+        List<Post> mockedList = new ArrayList<>();
+
+        mockedList.add(new Post("Title one", "Testing description 1", "Testing Content"));
+        mockedList.add(new Post("Title two", "Testing description 2", "Testing Content"));
+        mockedList.add(new Post("Title three", "Testing description 3", "Testing Content"));
+
+
+        when(postService.findAll()).thenReturn(mockedList);
+        List<Post> result = posts.getPosts();
+
+        assertThat(result.size()).isEqualTo(3);
+    }
+
+
 }

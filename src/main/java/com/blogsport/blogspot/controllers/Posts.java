@@ -1,7 +1,8 @@
 package com.blogsport.blogspot.controllers;
 
 import com.blogsport.blogspot.entity.Post;
-import com.blogsport.blogspot.repository.PostRepository;
+import com.blogsport.blogspot.services.PostService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +14,8 @@ import java.util.List;
 @RequestMapping("/posts")
 public class Posts {
 
-    PostRepository postRepository;
+    @Autowired
+    PostService postService;
 
     @GetMapping("/hello")
     public String sayHello() {
@@ -22,10 +24,6 @@ public class Posts {
 
     @GetMapping("/")
     public List<Post> getPosts() {
-        for (Post post: postRepository.findAll()) {
-            System.out.println(post.toString());
-        }
-
-        return new ArrayList<Post>(postRepository.findAll());
+        return new ArrayList<Post>(postService.findAll());
     }
 }
