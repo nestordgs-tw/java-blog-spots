@@ -1,6 +1,6 @@
 package com.blogsport.blogspot.services;
 
-import com.blogsport.blogspot.beans.PostRepositoryImpl;
+import com.blogsport.blogspot.repository.PostRepositoryImpl;
 import com.blogsport.blogspot.entity.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

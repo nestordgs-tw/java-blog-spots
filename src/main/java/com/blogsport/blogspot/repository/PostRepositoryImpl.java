@@ -1,4 +1,4 @@
-package com.blogsport.blogspot.beans;
+package com.blogsport.blogspot.repository;
 
 import com.blogsport.blogspot.entity.Post;
 import com.blogsport.blogspot.repository.PostRepository;
