@@ -1,8 +1,8 @@
 package com.blogsport.blogspot;
 
-import com.blogsport.blogspot.controllers.Posts;
+import com.blogsport.blogspot.controllers.PostController;
 import com.blogsport.blogspot.entity.Post;
-import com.blogsport.blogspot.services.PostService;
+import com.blogsport.blogspot.services.PostServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,15 +19,15 @@ import static org.mockito.Mockito.when;
 public class PostsTests {
 
     @InjectMocks
-    Posts posts;
+    PostController postController;
 
     @Mock
-    PostService postService;
+    PostServiceImpl postService;
 
     @Test
     @DisplayName("Testing sayHelloController")
     void sayHelloController() {
-        String result = posts.sayHello();
+        String result = postController.sayHello();
 
         assertThat(result).isEqualTo("Hello Tester");
     }
@@ -44,7 +44,7 @@ public class PostsTests {
 
 
         when(postService.findAll()).thenReturn(mockedList);
-        List<Post> result = posts.getPosts();
+        List<Post> result = postController.getPosts();
 
         assertThat(result.size()).isEqualTo(3);
     }

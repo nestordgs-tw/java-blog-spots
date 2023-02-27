@@ -1,18 +1,30 @@
 package com.blogsport.blogspot.repository;
 
 import com.blogsport.blogspot.entity.Post;
-import com.blogsport.blogspot.repository.PostRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Component
-public class PostRepositoryImpl implements PostRepository {
+public class PostRepositoryImpl implements IPostRepository {
 
     @Override
     public List<Post> findByTitle(String title) {
         return null;
+    }
+
+    @Override
+    public List<Post> findAll() {
+        List<Post> myList = new ArrayList<>();
+
+
+        myList.add(new Post("Title one", "Testing description 1", "Testing Content"));
+        myList.add(new Post("Title two", "Testing description 2", "Testing Content"));
+        myList.add(new Post("Title three", "Testing description 3", "Testing Waka"));
+
+        return myList;
     }
 
     @Override
@@ -35,10 +47,8 @@ public class PostRepositoryImpl implements PostRepository {
         return false;
     }
 
-    @Override
-    public List<Post> findAll() {
-        return null;
-    }
+
+
 
     @Override
     public Iterable<Post> findAllById(Iterable<Long> longs) {

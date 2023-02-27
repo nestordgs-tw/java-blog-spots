@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface PostRepository extends CrudRepository<Post, Long> {
+public interface IPostRepository extends CrudRepository<Post, Long> {
 
     List<Post> findByTitle(String title);
 
