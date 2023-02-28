@@ -41,6 +41,10 @@ public class Article {
         return content;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

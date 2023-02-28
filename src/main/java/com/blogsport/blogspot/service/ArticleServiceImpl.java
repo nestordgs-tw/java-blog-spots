@@ -10,16 +10,16 @@ import java.util.List;
 @Service
 public class ArticleServiceImpl implements IArticleService {
 
-    private final ArticleRepositoryImpl postRepositoryIm;
+    private final ArticleRepositoryImpl articleRepository;
 
     @Autowired
-    public ArticleServiceImpl(ArticleRepositoryImpl postRepositoryIm) {
-        this.postRepositoryIm = postRepositoryIm;
+    public ArticleServiceImpl(ArticleRepositoryImpl articleRepository) {
+        this.articleRepository = articleRepository;
     }
 
 
     public List<Article> findAll() {
-        return this.postRepositoryIm.findAll();
+        return this.articleRepository.findAll();
     }
 
     @Override

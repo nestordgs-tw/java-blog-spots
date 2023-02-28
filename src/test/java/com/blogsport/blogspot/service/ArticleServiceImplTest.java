@@ -2,25 +2,31 @@ package com.blogsport.blogspot.service;
 
 import com.blogsport.blogspot.entity.Article;
 import com.blogsport.blogspot.repository.ArticleRepositoryImpl;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
-
 class ArticleServiceImplTest {
-
-    @InjectMocks
+//    @InjectMocks
     ArticleServiceImpl articleService;
 
-    @Mock
+//    @Mock
     ArticleRepositoryImpl articleRepository;
 
+    @BeforeEach
+    public void setUp() {
+//        MockitoAnnotations.openMocks(this);
+        articleRepository = Mockito.mock(ArticleRepositoryImpl.class);
+        articleService = new ArticleServiceImpl(articleRepository);
+    }
+
     @Test
+    @DisplayName("Testing find All method")
     void findAllService() {
         List<Article> mockedList = new ArrayList<>();
 
@@ -28,11 +34,10 @@ class ArticleServiceImplTest {
         mockedList.add(new Article("Title two", "Testing description 2", "Testing Content"));
         mockedList.add(new Article("Title three", "Testing description 3", "Testing Content"));
 
-        when(articleRepository.findAll()).thenReturn(mockedList);
+        Mockito.when(articleRepository.findAll()).thenReturn(mockedList);
 
         List<Article> result = articleService.findAll();
 
-        assertThat(result.size()).isEqualTo(3);
-//        assertThat(1).isEqualTo(1);
+        Assertions.assertEquals(3, result.size());
     }
 }
