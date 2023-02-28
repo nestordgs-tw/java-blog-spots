@@ -1,7 +1,7 @@
 package com.blogsport.blogspot.controllers;
 
-import com.blogsport.blogspot.entity.Post;
-import com.blogsport.blogspot.service.PostServiceImpl;
+import com.blogsport.blogspot.entity.Article;
+import com.blogsport.blogspot.service.ArticleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,14 +12,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/posts")
-public class PostController {
+public class ArticleController {
 
 
-    private final PostServiceImpl postService;
+    private final ArticleServiceImpl articleService;
 
     @Autowired
-    public PostController(PostServiceImpl postService) {
-        this.postService = postService;
+    public ArticleController(ArticleServiceImpl postService) {
+        this.articleService = postService;
     }
 
     @GetMapping("/hello")
@@ -28,7 +28,7 @@ public class PostController {
     }
 
     @GetMapping("/")
-    public List<Post> getPosts() {
-        return new ArrayList<>(postService.findAll());
+    public List<Article> getPosts() {
+        return new ArrayList<>(articleService.findAll());
     }
 }

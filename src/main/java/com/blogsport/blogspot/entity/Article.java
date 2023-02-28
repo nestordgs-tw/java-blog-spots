@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Post {
+public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -15,10 +15,10 @@ public class Post {
     private String description;
     private String content;
 
-    public Post() {
+    public Article() {
 
     }
-    public Post(String title, String description, String content) {
+    public Article(String title, String description, String content) {
         this.title = title;
         this.content = content;
         this.description = description;
@@ -27,7 +27,7 @@ public class Post {
     @Override
     public String toString() {
         return String.format(
-                "Post[id%d, title='%s', description='%s', content='%s']",
+                "Article[id%d, title='%s', description='%s', content='%s']",
                 id, title, description, content);
     }
 

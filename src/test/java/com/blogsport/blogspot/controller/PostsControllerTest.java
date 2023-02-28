@@ -1,8 +1,8 @@
 package com.blogsport.blogspot.controller;
 
-import com.blogsport.blogspot.controllers.PostController;
-import com.blogsport.blogspot.entity.Post;
-import com.blogsport.blogspot.service.PostServiceImpl;
+import com.blogsport.blogspot.controllers.ArticleController;
+import com.blogsport.blogspot.entity.Article;
+import com.blogsport.blogspot.service.ArticleServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,15 +19,15 @@ import static org.mockito.Mockito.when;
 public class PostsControllerTest {
 
     @InjectMocks
-    PostController postController;
+    ArticleController articleController;
 
     @Mock
-    PostServiceImpl postService;
+    ArticleServiceImpl postService;
 
     @Test
     @DisplayName("Testing sayHelloController")
     void sayHelloController() {
-        String result = postController.sayHello();
+        String result = articleController.sayHello();
 
         assertThat(result).isEqualTo("Hello Tester");
     }
@@ -36,15 +36,15 @@ public class PostsControllerTest {
     @Test
     @DisplayName("Testing getPostsController")
     void getPostsController() {
-        List<Post> mockedList = new ArrayList<>();
+        List<Article> mockedList = new ArrayList<>();
 
-        mockedList.add(new Post("Title one", "Testing description 1", "Testing Content"));
-        mockedList.add(new Post("Title two", "Testing description 2", "Testing Content"));
-        mockedList.add(new Post("Title three", "Testing description 3", "Testing Content"));
+        mockedList.add(new Article("Title one", "Testing description 1", "Testing Content"));
+        mockedList.add(new Article("Title two", "Testing description 2", "Testing Content"));
+        mockedList.add(new Article("Title three", "Testing description 3", "Testing Content"));
 
 
         when(postService.findAll()).thenReturn(mockedList);
-        List<Post> result = postController.getPosts();
+        List<Article> result = articleController.getPosts();
 
         assertThat(result.size()).isEqualTo(3);
     }
