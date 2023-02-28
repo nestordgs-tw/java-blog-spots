@@ -1,4 +1,4 @@
-package com.blogsport.blogspot.services;
+package com.blogsport.blogspot.service;
 
 import com.blogsport.blogspot.entity.Post;
 

@@ -1,8 +1,8 @@
-package com.blogsport.blogspot;
+package com.blogsport.blogspot.controller;
 
 import com.blogsport.blogspot.controllers.PostController;
 import com.blogsport.blogspot.entity.Post;
-import com.blogsport.blogspot.services.PostServiceImpl;
+import com.blogsport.blogspot.service.PostServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class PostsTests {
+public class PostsControllerTest {
 
     @InjectMocks
     PostController postController;

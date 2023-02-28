@@ -1,14 +1,12 @@
-package com.blogsport.blogspot.services;
+package com.blogsport.blogspot.service;
 
 import com.blogsport.blogspot.entity.Post;
 import com.blogsport.blogspot.repository.PostRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
 @Service
 public class PostServiceImpl implements IPostService {
 
@@ -22,8 +20,6 @@ public class PostServiceImpl implements IPostService {
 
     public List<Post> findAll() {
         List<Post> result = this.postRepositoryIm.findAll();
-
-        System.out.println(result);
 
         return result;
     }

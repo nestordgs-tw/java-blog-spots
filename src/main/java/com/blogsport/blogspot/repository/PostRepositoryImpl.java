@@ -47,9 +47,6 @@ public class PostRepositoryImpl implements IPostRepository {
         return false;
     }
 
-
-
-
     @Override
     public Iterable<Post> findAllById(Iterable<Long> longs) {
         return null;
