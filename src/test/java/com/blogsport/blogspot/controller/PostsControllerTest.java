@@ -22,7 +22,7 @@ public class PostsControllerTest {
     ArticleController articleController;
 
     @Mock
-    ArticleServiceImpl postService;
+    ArticleServiceImpl articleService;
 
     @Test
     @DisplayName("Testing sayHelloController")
@@ -43,7 +43,7 @@ public class PostsControllerTest {
         mockedList.add(new Article("Title three", "Testing description 3", "Testing Content"));
 
 
-        when(postService.findAll()).thenReturn(mockedList);
+        when(articleService.findAll()).thenReturn(mockedList);
         List<Article> result = articleController.getPosts();
 
         assertThat(result.size()).isEqualTo(3);

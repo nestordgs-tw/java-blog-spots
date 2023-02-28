@@ -19,9 +19,7 @@ public class ArticleServiceImpl implements IArticleService {
 
 
     public List<Article> findAll() {
-        List<Article> result = this.postRepositoryIm.findAll();
-
-        return result;
+        return this.postRepositoryIm.findAll();
     }
 
     @Override
