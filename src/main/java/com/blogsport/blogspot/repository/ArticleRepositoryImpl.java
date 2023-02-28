@@ -22,8 +22,9 @@ public class ArticleRepositoryImpl implements IArticleRepository {
 
     @Override
     public List<Article> findAll() {
+        String query = String.format("SELECT id, title, description content FROM %s", "article");
         List<Article> myArticles = new ArrayList<>();
-        List<Map<String, Object>> rows = jdbcTemplate.queryForList("SELECT id, title, description content FROM {TABLE_NAME}".format(TABLENAME));
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(query);
         System.out.println(rows);
 
         for (Map<String, Object> row: rows) {
