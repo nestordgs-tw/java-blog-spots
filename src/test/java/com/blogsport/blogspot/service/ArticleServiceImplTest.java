@@ -20,7 +20,6 @@ class ArticleServiceImplTest {
 
     @BeforeEach
     public void setUp() {
-//        MockitoAnnotations.openMocks(this);
         articleRepository = Mockito.mock(ArticleRepositoryImpl.class);
         articleService = new ArticleServiceImpl(articleRepository);
     }
