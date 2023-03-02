@@ -12,10 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 class ArticleServiceImplTest {
-//    @InjectMocks
-    ArticleServiceImpl articleService;
 
-//    @Mock
+    ArticleServiceImpl articleService;
     ArticleRepositoryImpl articleRepository;
 
     @BeforeEach
