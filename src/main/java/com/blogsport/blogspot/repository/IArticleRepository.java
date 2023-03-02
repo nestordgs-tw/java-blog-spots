@@ -13,4 +13,6 @@ public interface IArticleRepository {
 
     Article findById(long id);
 
+    boolean insert(Article article);
+
 }

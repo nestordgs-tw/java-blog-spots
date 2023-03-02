@@ -26,4 +26,8 @@ public class ArticleServiceImpl implements IArticleService {
     public List<Article> findByTitle(String title) {
         return null;
     }
+
+    public boolean insert(Article article){
+        return this.articleRepository.insert(article);
+    }
 }

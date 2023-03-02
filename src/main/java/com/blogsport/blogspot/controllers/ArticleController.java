@@ -3,9 +3,9 @@ package com.blogsport.blogspot.controllers;
 import com.blogsport.blogspot.entity.Article;
 import com.blogsport.blogspot.service.ArticleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,4 +30,13 @@ public class ArticleController {
     public List<Article> getPosts() {
         return new ArrayList<>(articleService.findAll());
     }
+
+    @PostMapping("/article")
+    public ResponseEntity<Boolean> insert(@RequestBody Article article){
+
+        boolean createdArticle =  articleService.insert(article);
+
+        return new ResponseEntity<>(createdArticle, HttpStatus.CREATED);
+    }
+
 }
