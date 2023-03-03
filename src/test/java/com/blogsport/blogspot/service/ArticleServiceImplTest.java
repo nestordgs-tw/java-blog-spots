@@ -42,6 +42,24 @@ class ArticleServiceImplTest {
     }
 
     @Test
+    @DisplayName("Test for insert method")
+    void returnTrueWhenCallInsertMethodIsSuccess(){
+
+        boolean expectedResult = true;
+
+        Article mockedArticle = new Article(
+                "Title one",
+                "Testing description 1",
+                "Testing Content");
+
+        Mockito.when(articleRepository.insert(mockedArticle)).thenReturn(true);
+
+        boolean result = articleService.insert(mockedArticle);
+
+        Assertions.assertEquals(expectedResult, result);
+    }
+
+    @Test
     @DisplayName("Testing Delete item OK")
     void deleteMethodOk() throws Exception {
         long id = 1;

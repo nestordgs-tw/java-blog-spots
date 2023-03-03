@@ -27,9 +27,12 @@ public class ArticleServiceImpl implements IArticleService {
         return null;
     }
 
+    public boolean insert(Article article){
+        return this.articleRepository.insert(article);
+    }
+
     @Override
     public long deleteById(long id) throws Exception {
-
         Article article = this.articleRepository.findById(id);
 
         if (article == null) {

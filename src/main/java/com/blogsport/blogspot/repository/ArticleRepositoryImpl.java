@@ -4,6 +4,7 @@ import com.blogsport.blogspot.entity.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -13,8 +14,12 @@ import java.util.Map;
 @Component
 public class ArticleRepositoryImpl implements IArticleRepository {
 
+    private final String SQL_INSERT_PERSON = "insert into article(title, description, content) values(?,?,?)";
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    SimpleJdbcInsert simpleJdbcInsert;
 
     @Override
     public List<Article> findByTitle(String title) {
@@ -63,4 +68,9 @@ public class ArticleRepositoryImpl implements IArticleRepository {
             return false;
         }
     }
+
+    public boolean insert(Article article) {
+        return jdbcTemplate.update(SQL_INSERT_PERSON, article.getTitle(), article.getDescription(), article.getContent()) > 0;
+    }
+
 }
