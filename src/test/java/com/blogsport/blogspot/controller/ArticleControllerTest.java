@@ -3,20 +3,19 @@ package com.blogsport.blogspot.controller;
 import com.blogsport.blogspot.controllers.ArticleController;
 import com.blogsport.blogspot.entity.Article;
 import com.blogsport.blogspot.service.ArticleServiceImpl;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.HttpStatus.CREATED;
 
@@ -62,9 +61,9 @@ public class ArticleControllerTest {
 
         when(articleService.insert(articleMock)).thenReturn(true);
 
-        ResponseEntity expectedResponse =  new ResponseEntity<>(true, CREATED);
-        ResponseEntity result = articleController.insert(articleMock);
+        ResponseEntity<Boolean> expectedResponse =  new ResponseEntity<>(true, CREATED);
+        ResponseEntity<Boolean> result = articleController.insert(articleMock);
 
-        assertEquals(expectedResponse , result);
+        Assertions.assertEquals(expectedResponse, result);
     }
 }

@@ -37,4 +37,22 @@ class ArticleServiceImplTest {
 
         Assertions.assertEquals(3, result.size());
     }
+
+    @Test
+    @DisplayName("Test for insert method")
+    void returnTrueWhenCallInsertMethodIsSuccess(){
+
+        boolean expectedResult = true;
+
+        Article mockedArticle = new Article(
+                "Title one",
+                "Testing description 1",
+                "Testing Content");
+
+        Mockito.when(articleRepository.insert(mockedArticle)).thenReturn(true);
+
+        boolean result = articleService.insert(mockedArticle);
+
+        Assertions.assertEquals(expectedResult, result);
+    }
 }
