@@ -39,7 +39,7 @@ public class ArticleController {
         return new ResponseEntity<>(createdArticle, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/article/{id}")
     public String deleteById(@PathVariable("id") long id) {
         try {
             long idDeleted = articleService.deleteById(id);
