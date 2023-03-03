@@ -3,9 +3,7 @@ package com.blogsport.blogspot.controllers;
 import com.blogsport.blogspot.entity.Article;
 import com.blogsport.blogspot.service.ArticleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,5 +27,14 @@ public class ArticleController {
     @GetMapping("/")
     public List<Article> getPosts() {
         return new ArrayList<>(articleService.findAll());
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteById(@PathVariable("id") long id) throws Exception {
+        try {
+            return String.format("%s", articleService.deleteById(id));
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.blogsport.blogspot.repository;
 
 import com.blogsport.blogspot.entity.Article;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -41,6 +42,25 @@ public class ArticleRepositoryImpl implements IArticleRepository {
 
     @Override
     public Article findById(long id) {
-        return null;
+        String query  = String.format("SELECT * FROM article WHERE id = %s", id);
+        try {
+            return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Article.class));
+        } catch (Exception e) {
+            System.out.println("User not found");
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public boolean deleteById(long id) {
+        String query = "DELETE FROM article WHERE id = ?";
+        try {
+            return jdbcTemplate.update(query, id) == 1;
+        } catch (Exception e) {
+            System.out.println("Something went wrong");
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 }
