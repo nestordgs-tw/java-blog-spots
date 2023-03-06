@@ -11,4 +11,6 @@ public interface IArticleService {
     List<Article> findByTitle(String title);
 
     long deleteById(long id) throws Exception;
+
+    long updateById(long id) throws Exception;
 }

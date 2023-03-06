@@ -47,4 +47,17 @@ public class ArticleServiceImpl implements IArticleService {
             throw new Exception("Something went wrong");
         }
     }
+
+
+    public long updateById(long id) throws Exception{
+        if (this.articleRepository.findById(id) != null) {
+            if (this.articleRepository.updateById(id)) {
+                return id;
+            } else {
+                throw new Exception("Something went wrong");
+            }
+        } else{
+            throw new Exception("Article does not exists");
+        }
+    }
 }

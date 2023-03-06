@@ -15,6 +15,8 @@ public class ArticleRepositoryImpl implements IArticleRepository {
 
     private final String SQL_INSERT_PERSON = "insert into article(title, description, content) values(?,?,?)";
 
+    private final String SQL_UPDATE_PERSON = "UPDATE ARTICLE SET ID = ? WHERE ID = ?";
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -68,6 +70,16 @@ public class ArticleRepositoryImpl implements IArticleRepository {
 
     public boolean insert(Article article) {
         return jdbcTemplate.update(SQL_INSERT_PERSON, article.getTitle(), article.getDescription(), article.getContent()) > 0;
+    }
+
+    public boolean updateById(long id) {
+        try {
+            return jdbcTemplate.update(SQL_UPDATE_PERSON, id) == 1;
+        } catch (Exception e) {
+            System.out.println("Something went wrong");
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
 }

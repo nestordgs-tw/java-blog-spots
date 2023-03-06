@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping("/posts")
@@ -46,6 +49,24 @@ public class ArticleController {
             return String.format("%s", idDeleted);
         } catch (Exception e) {
             return e.getMessage();
+        }
+    }
+
+    @PostMapping(value= "/article/update/{id}")
+    public ResponseEntity<String> updateByIdPath(@PathVariable("id") long id) {
+        try {
+            return new ResponseEntity<>(String.format("%s", articleService.updateById(id)), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping(value= "/article/update")
+    public ResponseEntity<String> updateById(@RequestBody Article article) {
+        try {
+            return new ResponseEntity<>(String.format("%s", articleService.updateById(article.getId())), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

@@ -91,4 +91,48 @@ public class ArticleControllerTest {
 
         assertThat(exceptionMessageExpected).isEqualTo(result);
     }
+
+    @Test
+    @DisplayName("Update Path method OK")
+    void updatePathController() throws Exception {
+        long id = 1;
+        long mockResult = 1;
+
+        when(articleService.updateById(id)).thenReturn(id);
+
+        assertThat(mockResult).isEqualTo(articleController.updateByIdPath(id));
+    }
+
+    @Test
+    @DisplayName("Update Path method NOT OK")
+    void updatePathControllerNOTOk() throws Exception {
+        long id = 1;
+        String exceptionMessageExpected = "Article does not exists";
+
+        when(articleService.updateById(id)).thenThrow(new Exception(exceptionMessageExpected));
+
+        assertThat(exceptionMessageExpected).isEqualTo(articleController.updateByIdPath(id));
+    }
+
+    @Test
+    @DisplayName("Update Body method OK")
+    void updateBodyController() throws Exception {
+        Article articleMock = new Article("Title one", "Testing description 1", "Testing Content");
+        String mockResult = "1";
+
+        when(articleService.updateById(articleMock.getId())).thenReturn(articleMock.getId());
+
+        assertThat(mockResult).isEqualTo(articleController.updateById(articleMock));
+    }
+
+    @Test
+    @DisplayName("Update Body method NOT OK")
+    void updateBodyControllerNOTOk() throws Exception {
+        Article articleMock = new Article("Title one", "Testing description 1", "Testing Content");
+        String exceptionMessageExpected = "Article does not exists";
+
+        when(articleService.updateById(articleMock.getId())).thenThrow(new Exception(exceptionMessageExpected));
+        
+        assertThat(exceptionMessageExpected).isEqualTo(articleController.updateById(articleMock));
+    }
 }
