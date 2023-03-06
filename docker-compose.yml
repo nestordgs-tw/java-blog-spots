@@ -12,6 +12,6 @@ services:
         MYSQL_USER: admin
         MYSQL_PASSWORD: 12345
       ports:
-        - "3300:3300"
+        - "3306:3306"
 volumes:
   my-data-volume:
