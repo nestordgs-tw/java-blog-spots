@@ -1,6 +1,8 @@
 package com.blogsport.blogspot.repository;
 
 import com.blogsport.blogspot.entity.Article;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,6 +14,8 @@ import java.util.Map;
 
 @Component
 public class ArticleRepositoryImpl implements IArticleRepository {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final String SQL_INSERT_PERSON = "insert into article(title, description, content) values(?,?,?)";
 
@@ -45,14 +49,13 @@ public class ArticleRepositoryImpl implements IArticleRepository {
     }
 
     @Override
-    public Article findById(long id) {
+    public Article findById(long id) throws Exception {
         String query  = String.format("SELECT * FROM article WHERE id = %s", id);
         try {
             return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Article.class));
         } catch (Exception e) {
-            System.out.println("User not found");
-            System.out.println(e.getMessage());
-            return null;
+            logger.error("Article not found");
+            throw new Exception(e.getMessage());
         }
     }
 

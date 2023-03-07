@@ -63,7 +63,6 @@ public class ArticleServiceImpl implements IArticleService {
 
     @Override
     public Article findById(long id) throws Exception {
-
-        return null;
+        return this.articleRepository.findById(id);
     }
 }

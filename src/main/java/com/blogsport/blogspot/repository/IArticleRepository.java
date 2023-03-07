@@ -11,7 +11,7 @@ public interface IArticleRepository {
 
     Iterable<Article> findAll();
 
-    Article findById(long id);
+    Article findById(long id) throws Exception;
 
     boolean insert(Article article);
     

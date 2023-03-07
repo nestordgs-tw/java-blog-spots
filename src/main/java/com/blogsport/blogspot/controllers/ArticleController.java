@@ -38,7 +38,7 @@ public class ArticleController {
     @GetMapping("/article/{id}")
         public ResponseEntity<Article> getArticleById(@PathVariable long id) throws Exception {
             Article article = this.articleService.findById(id);
-            if(article != null){
+            if(article.getId() != null){
                 return new ResponseEntity<>(article, HttpStatus.OK);
             }
             throw new Exception();
