@@ -60,4 +60,10 @@ public class ArticleServiceImpl implements IArticleService {
             throw new Exception("Article does not exists");
         }
     }
+
+    @Override
+    public Article findById(long id) throws Exception {
+
+        return null;
+    }
 }

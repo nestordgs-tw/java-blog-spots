@@ -3,6 +3,7 @@ package com.blogsport.blogspot.controllers;
 import com.blogsport.blogspot.entity.Article;
 import com.blogsport.blogspot.service.ArticleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,16 @@ public class ArticleController {
     public List<Article> getPosts() {
         return new ArrayList<>(articleService.findAll());
     }
+
+    @GetMapping("/article/{id}")
+        public ResponseEntity<Article> getArticleById(@PathVariable long id) throws Exception {
+            Article article = this.articleService.findById(id);
+            if(article != null){
+                return new ResponseEntity<>(article, HttpStatus.OK);
+            }
+            throw new Exception();
+    }
+
 
     @PostMapping("/article")
     public ResponseEntity<Boolean> insert(@RequestBody Article article){

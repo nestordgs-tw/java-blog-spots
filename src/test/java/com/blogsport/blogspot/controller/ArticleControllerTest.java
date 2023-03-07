@@ -135,4 +135,17 @@ public class ArticleControllerTest {
         
         assertThat(exceptionMessageExpected).isEqualTo(articleController.updateById(articleMock));
     }
+
+    @Test
+    @DisplayName("Find Article by Id NOT OK")
+    void existingArticleById_ShouldReturn_ArticleObject(){
+        //@TODO: En contruccion
+
+    }
+
+    @Test
+    @DisplayName("")
+    void nonExistingArticleById_ShouldThrow_IllegalArgumentException(){
+        //@TODO: En construccion
+    }
 }
