@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -36,12 +37,12 @@ public class ArticleController {
     }
 
     @GetMapping("/article/{id}")
-        public ResponseEntity<Article> getArticleById(@PathVariable long id) throws Exception {
+        public ResponseEntity<Article> findById(@PathVariable long id) throws Exception {
             Article article = this.articleService.findById(id);
-            if(article.getId() != null){
-                return new ResponseEntity<>(article, HttpStatus.OK);
+            if(article.getId() == null) {
+                throw new Exception("Article not found");
             }
-            throw new Exception();
+            return new ResponseEntity<>(article, HttpStatus.OK);
     }
 
 

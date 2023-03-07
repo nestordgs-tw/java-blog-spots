@@ -15,8 +15,13 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.HttpStatus.CREATED;
 
@@ -129,7 +134,7 @@ public class ArticleControllerTest {
         assertThat(mockResult).isEqualTo(articleController.updateById(articleMock));
     }
 
-    @Disabled()
+    @Disabled
     @Test
     @DisplayName("Update Body method NOT OK")
     void updateBodyControllerNOTOk() throws Exception {
@@ -140,18 +145,29 @@ public class ArticleControllerTest {
         
         assertThat(exceptionMessageExpected).isEqualTo(articleController.updateById(articleMock));
     }
-    @Disabled()
-    @Test
-    @DisplayName("Find Article by Id NOT OK")
-    void existingArticleById_ShouldReturn_ArticleObject(){
-        //@TODO: En contruccion
 
+    @Test
+    void existingArticleById_ShouldReturn_ArticleObject() throws Exception {
+        long mockedId = 1L;
+        Article expectedResponse = new Article("Title one", "Testing description 1", "Testing Content");
+        expectedResponse.setId(1L);
+
+        when(articleService.findById(mockedId)).thenReturn(expectedResponse);
+        ResponseEntity<Article> result = articleController.findById(mockedId);
+
+        assertThat(Objects.requireNonNull(result.getBody()).getId()).isNotNull();
     }
 
-    @Disabled()
-    @Test
-    @DisplayName("")
-    void nonExistingArticleById_ShouldThrow_IllegalArgumentException(){
-        //@TODO: En construccion
+        @Test
+        void nonExistingArticleById_ShouldThrow_Exception() throws Exception {
+
+        long mockedId = 1L;
+
+        when(articleService.findById(mockedId)).thenThrow(new Exception("Article not found"));
+
+        assertThrows(Exception.class, () -> {
+            articleController.findById(1L);
+        });
     }
+
 }
