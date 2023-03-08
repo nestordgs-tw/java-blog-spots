@@ -3,12 +3,9 @@ package com.blogsport.blogspot.controllers;
 import com.blogsport.blogspot.entity.Article;
 import com.blogsport.blogspot.service.ArticleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,9 +35,11 @@ public class ArticleController {
 
     @GetMapping("/article/{id}")
         public ResponseEntity<Article> findById(@PathVariable long id) throws Exception {
+
             Article article = this.articleService.findById(id);
-            if(article.getId() == null) {
-                throw new Exception("Article not found");
+
+            if(article == null) {
+                return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
             }
             return new ResponseEntity<>(article, HttpStatus.OK);
     }
