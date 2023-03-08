@@ -82,4 +82,9 @@ public class ArticleRepositoryImpl implements IArticleRepository {
         }
     }
 
+    //TODO: En construccion
+    @Override
+    public Article update(long id, Article article) {
+        return null;
+    }
 }

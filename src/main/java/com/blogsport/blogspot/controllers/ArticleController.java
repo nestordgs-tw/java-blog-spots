@@ -80,4 +80,11 @@ public class ArticleController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    //TODO: En construccion
+    @PutMapping(value = "/article/update/{id}")
+    public ResponseEntity<Article> update(@PathVariable long id , @RequestBody Article requestBody){
+        Article response = articleService.update(id, requestBody);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }

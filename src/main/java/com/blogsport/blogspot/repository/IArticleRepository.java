@@ -17,6 +17,8 @@ public interface IArticleRepository {
     
     boolean deleteById(long id);
 
-    public boolean updateById(long id);
+    boolean updateById(long id);
+
+    Article update(long id, Article article);
 
 }

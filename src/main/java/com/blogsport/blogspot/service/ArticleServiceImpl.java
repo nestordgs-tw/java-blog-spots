@@ -65,4 +65,10 @@ public class ArticleServiceImpl implements IArticleService {
     public Article findById(long id) throws Exception {
         return this.articleRepository.findById(id);
     }
+
+    //TODO: En construccion
+    @Override
+    public Article update(long id, Article article) {
+        return this.articleRepository.update(id, article);
+    }
 }
