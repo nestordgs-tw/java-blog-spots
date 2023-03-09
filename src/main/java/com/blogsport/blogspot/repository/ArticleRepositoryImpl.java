@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -16,9 +15,8 @@ import java.util.Map;
 public class ArticleRepositoryImpl implements IArticleRepository {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    private final String SQL_INSERT_PERSON = "insert into article(title, description, content) values(?,?,?)";
-
+    private final String SQL_INSERT_ARTICLE = "insert into article(title, description, content) values(?,?,?)";
+    private final String SQL_UPDATE_ARTICLE = "UPDATE article SET TITLE = ?, DESCRIPTION = ?, CONTENT = ? WHERE ID = ?";
     private final String SQL_UPDATE_PERSON = "UPDATE ARTICLE SET ID = ? WHERE ID = ?";
 
     @Autowired
@@ -55,7 +53,7 @@ public class ArticleRepositoryImpl implements IArticleRepository {
             return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Article.class));
         } catch (Exception e) {
             logger.error("Article not found");
-            throw new Exception(e.getMessage());
+            return null;
         }
     }
 
@@ -72,7 +70,7 @@ public class ArticleRepositoryImpl implements IArticleRepository {
     }
 
     public boolean insert(Article article) {
-        return jdbcTemplate.update(SQL_INSERT_PERSON, article.getTitle(), article.getDescription(), article.getContent()) > 0;
+        return jdbcTemplate.update(SQL_INSERT_ARTICLE, article.getTitle(), article.getDescription(), article.getContent()) > 0;
     }
 
     public boolean updateById(long id) {
@@ -85,4 +83,13 @@ public class ArticleRepositoryImpl implements IArticleRepository {
         }
     }
 
+    @Override
+    public boolean update(Article article) {
+        return jdbcTemplate.update(
+                SQL_UPDATE_ARTICLE,
+                article.getTitle(),
+                article.getDescription(),
+                article.getContent(),
+                article.getId()) > 0;
+    }
 }

@@ -3,11 +3,9 @@ package com.blogsport.blogspot.controllers;
 import com.blogsport.blogspot.entity.Article;
 import com.blogsport.blogspot.service.ArticleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,12 +34,14 @@ public class ArticleController {
     }
 
     @GetMapping("/article/{id}")
-        public ResponseEntity<Article> getArticleById(@PathVariable long id) throws Exception {
+        public ResponseEntity<Article> findById(@PathVariable long id) throws Exception {
+
             Article article = this.articleService.findById(id);
-            if(article.getId() != null){
-                return new ResponseEntity<>(article, HttpStatus.OK);
+
+            if(article == null) {
+                return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
             }
-            throw new Exception();
+            return new ResponseEntity<>(article, HttpStatus.OK);
     }
 
 
@@ -79,5 +79,14 @@ public class ArticleController {
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @PutMapping(value = "/article/{id}")
+    public ResponseEntity<String> update(@PathVariable long id , @RequestBody Article requestBody) throws Exception {
+
+        long response = articleService.update(id, requestBody);
+
+        return new ResponseEntity<>(String.format("Articulo actualizado ID: %s", response), HttpStatus.OK);
+
     }
 }

@@ -15,4 +15,6 @@ public interface IArticleService {
     long updateById(long id) throws Exception;
 
     Article findById(long id) throws Exception;
+
+    long update(long id, Article article) throws Exception;
 }

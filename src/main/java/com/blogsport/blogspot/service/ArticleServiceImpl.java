@@ -65,4 +65,24 @@ public class ArticleServiceImpl implements IArticleService {
     public Article findById(long id) throws Exception {
         return this.articleRepository.findById(id);
     }
+
+    @Override
+    public long update(long id, Article articleDto) throws Exception {
+
+        Article toBeUpdate = mapToUpdate(id, articleDto);
+        boolean result = this.articleRepository.update(toBeUpdate);
+
+        if(result) {
+            return id;
+        }
+        throw new Exception("Articulo no actualizado");
+    }
+
+    private Article mapToUpdate(long id, Article articleDto) throws Exception {
+
+        Article oldArticle = this.articleRepository.findById(id);
+        articleDto.setId(oldArticle.getId());
+
+        return articleDto;
+    }
 }
