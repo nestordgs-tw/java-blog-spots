@@ -19,6 +19,6 @@ public interface IArticleRepository {
 
     boolean updateById(long id);
 
-    Article update(long id, Article article);
+    boolean update(Article article);
 
 }

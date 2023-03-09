@@ -81,10 +81,12 @@ public class ArticleController {
         }
     }
 
-    //TODO: En construccion
-    @PutMapping(value = "/article/update/{id}")
-    public ResponseEntity<Article> update(@PathVariable long id , @RequestBody Article requestBody){
-        Article response = articleService.update(id, requestBody);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    @PutMapping(value = "/article/{id}")
+    public ResponseEntity<String> update(@PathVariable long id , @RequestBody Article requestBody) throws Exception {
+
+        long response = articleService.update(id, requestBody);
+
+        return new ResponseEntity<>(String.format("Articulo actualizado ID: %s", response), HttpStatus.OK);
+
     }
 }

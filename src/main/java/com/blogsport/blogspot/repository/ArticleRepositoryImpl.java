@@ -15,7 +15,8 @@ import java.util.Map;
 public class ArticleRepositoryImpl implements IArticleRepository {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final String SQL_INSERT_PERSON = "insert into article(title, description, content) values(?,?,?)";
+    private final String SQL_INSERT_ARTICLE = "insert into article(title, description, content) values(?,?,?)";
+    private final String SQL_UPDATE_ARTICLE = "UPDATE article SET TITLE = ?, DESCRIPTION = ?, CONTENT = ? WHERE ID = ?";
     private final String SQL_UPDATE_PERSON = "UPDATE ARTICLE SET ID = ? WHERE ID = ?";
 
     @Autowired
@@ -69,7 +70,7 @@ public class ArticleRepositoryImpl implements IArticleRepository {
     }
 
     public boolean insert(Article article) {
-        return jdbcTemplate.update(SQL_INSERT_PERSON, article.getTitle(), article.getDescription(), article.getContent()) > 0;
+        return jdbcTemplate.update(SQL_INSERT_ARTICLE, article.getTitle(), article.getDescription(), article.getContent()) > 0;
     }
 
     public boolean updateById(long id) {
@@ -82,9 +83,13 @@ public class ArticleRepositoryImpl implements IArticleRepository {
         }
     }
 
-    //TODO: En construccion
     @Override
-    public Article update(long id, Article article) {
-        return null;
+    public boolean update(Article article) {
+        return jdbcTemplate.update(
+                SQL_UPDATE_ARTICLE,
+                article.getTitle(),
+                article.getDescription(),
+                article.getContent(),
+                article.getId()) > 0;
     }
 }
