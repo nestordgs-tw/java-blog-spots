@@ -1,20 +1,6 @@
 version: "3.7"
 
 services:
-  backend:
-    image: openjdk:19
-    container_name: blogSpotContainer
-    volumes:
-      - ./build/libs/:/app
-    working_dir: /app
-    networks:
-      - backend-network
-    command: |
-      java -jar blog-spot-0.0.1-SNAPSHOT.jar
-    env_file:
-      - .env
-    ports:
-      - "8000:8080"
   db:
     image: mysql:latest
     container_name: blog-spot-bd
