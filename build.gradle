@@ -28,5 +28,3 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
-
-apply from: "$projectDir/gradle/prePush.gradle"
