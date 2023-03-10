@@ -72,9 +72,8 @@ public class ArticleServiceImpl implements IArticleService {
         Article toBeUpdate = mapToUpdate(id, articleDto);
         boolean result = this.articleRepository.update(toBeUpdate);
 
-        if(result) {
-            return id;
-        }
+        if(result) return id;
+
         throw new Exception("Articulo no actualizado");
     }
 
