@@ -1,6 +1,8 @@
 package com.blogsport.blogspot.repository;
 
+import com.blogsport.blogspot.dto.ArticleDto;
 import com.blogsport.blogspot.entity.Article;
+import com.blogsport.blogspot.mapper.ArticleRowMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,16 @@ public class ArticleRepositoryImpl implements IArticleRepository {
         return myArticles;
     }
 
+    public List<ArticleDto> findAll2() {
+
+        final String table = "article";
+        String query = String.format("SELECT id, title, description, content FROM %s", table);
+
+        return jdbcTemplate.query(
+            query,
+            new ArticleRowMapper());
+    }
+
     @Override
     public Article findById(long id) throws Exception {
         String query  = String.format("SELECT * FROM article WHERE id = %s", id);
@@ -63,8 +75,7 @@ public class ArticleRepositoryImpl implements IArticleRepository {
         try {
             return jdbcTemplate.update(query, id) == 1;
         } catch (Exception e) {
-            System.out.println("Something went wrong");
-            System.out.println(e.getMessage());
+            logger.error("Something went wrong");
             return false;
         }
     }
@@ -77,8 +88,7 @@ public class ArticleRepositoryImpl implements IArticleRepository {
         try {
             return jdbcTemplate.update(SQL_UPDATE_PERSON, id) == 1;
         } catch (Exception e) {
-            System.out.println("Something went wrong");
-            System.out.println(e.getMessage());
+            logger.error("Something went wrong");
             return false;
         }
     }

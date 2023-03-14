@@ -1,5 +1,6 @@
 package com.blogsport.blogspot.service;
 
+import com.blogsport.blogspot.dto.ArticleDto;
 import com.blogsport.blogspot.entity.Article;
 import com.blogsport.blogspot.repository.ArticleRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,8 @@ public class ArticleServiceImpl implements IArticleService {
         return this.articleRepository.findAll();
     }
 
-    @Override
-    public List<Article> findByTitle(String title) {
-        return null;
+    public List<ArticleDto> findAll2() {
+        return this.articleRepository.findAll2();
     }
 
     public boolean insert(Article article){
@@ -36,7 +36,7 @@ public class ArticleServiceImpl implements IArticleService {
         Article article = this.articleRepository.findById(id);
 
         if (article == null) {
-            throw new Exception("Article does not exists");
+            throw new NullPointerException("Article does not exists");
         }
 
         boolean resultDelete = this.articleRepository.deleteById(id);
@@ -44,7 +44,7 @@ public class ArticleServiceImpl implements IArticleService {
         if (resultDelete) {
             return id;
         } else {
-            throw new Exception("Something went wrong");
+            throw new NullPointerException("Something went wrong");
         }
     }
 
@@ -54,10 +54,10 @@ public class ArticleServiceImpl implements IArticleService {
             if (this.articleRepository.updateById(id)) {
                 return id;
             } else {
-                throw new Exception("Something went wrong");
+                throw new NullPointerException("Something went wrong");
             }
         } else{
-            throw new Exception("Article does not exists");
+            throw new NullPointerException("Article does not exists");
         }
     }
 
@@ -74,7 +74,7 @@ public class ArticleServiceImpl implements IArticleService {
 
         if(result) return id;
 
-        throw new Exception("Articulo no actualizado");
+        throw new NullPointerException("Article does not update");
     }
 
     private Article mapToUpdate(long id, Article articleDto) throws Exception {

@@ -1,5 +1,6 @@
 package com.blogsport.blogspot.controllers;
 
+import com.blogsport.blogspot.dto.ArticleDto;
 import com.blogsport.blogspot.entity.Article;
 import com.blogsport.blogspot.service.ArticleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,17 @@ public class ArticleController {
     @GetMapping("/")
     public List<Article> getPosts() {
         return new ArrayList<>(articleService.findAll());
+    }
+
+    @GetMapping("/articles")
+    public ResponseEntity<List<ArticleDto>> findAll() {
+
+        List<ArticleDto> response = articleService.findAll2();
+
+        if(null != response){
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/article/{id}")
