@@ -40,5 +40,5 @@ jobs:
           CLOUDSDK_APP_CLOUD_BUILD_TIMEOUT: 1800
         with:
           project_id: ${{ secrets.GCLOUD_PROJECT_ID }}
-          version: '${{ github.sha }}'
-          promote: true
+#          version: '${{ github.sha }}'
+#          promote: true
