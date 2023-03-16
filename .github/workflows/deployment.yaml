@@ -30,9 +30,14 @@ jobs:
 
       - name: Deploy to App Engine
         uses: google-github-actions/deploy-appengine@v1
+        env:
+          DB_PORT: ${{ secrets.DB_PORT }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_HOSTNAME: ${{ secrets.DB_HOSTNAME }}
+          DB_INSTANCE_NAME: ${{ secrets.DB_INSTANCE_NAME }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         with:
           project_id: ${{ secrets.GCLOUD_PROJECT_ID }}
           version: '${{ github.sha }}'
           promote: true
-#          credentials: ${{ secrets.GCP_SA_KEY }}
-#          stop_previous_version: true
