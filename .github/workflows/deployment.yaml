@@ -37,6 +37,7 @@ jobs:
           DB_INSTANCE_NAME: ${{ secrets.DB_INSTANCE_NAME }}
           DB_USERNAME: ${{ secrets.DB_USERNAME }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          CLOUDSDK_APP_CLOUD_BUILD_TIMEOUT: 1800
         with:
           project_id: ${{ secrets.GCLOUD_PROJECT_ID }}
           version: '${{ github.sha }}'
