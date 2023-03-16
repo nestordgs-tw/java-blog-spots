@@ -37,23 +37,24 @@ jobs:
           project_id: ${{ secrets.GCLOUD_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
 
-      - name: Deploy app
-        run: |
-          gcloud app deploy --quiet --project ${{ secrets.GCLOUD_PROJECT_ID }} --verbosity=debug
-          
-
+#      - name: Deploy app
+#        run: |
+#          gcloud app deploy --quiet --project ${{ secrets.GCLOUD_PROJECT_ID }} --verbosity=debug
 #       gcloud config set ${{ secrets.GCLOUD_PROJECT_ID }} &&
-#      - name: Deploy to App Engine
-#        uses: google-github-actions/deploy-appengine@v1
-#        env:
-#          DB_PORT: ${{ secrets.DB_PORT }}
-#          DB_NAME: ${{ secrets.DB_NAME }}
-#          DB_HOSTNAME: ${{ secrets.DB_HOSTNAME }}
-#          DB_INSTANCE_NAME: ${{ secrets.DB_INSTANCE_NAME }}
-#          DB_USERNAME: ${{ secrets.DB_USERNAME }}
-#          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-#          CLOUDSDK_APP_CLOUD_BUILD_TIMEOUT: 1800
-#        with:
-#          project_id: ${{ secrets.GCLOUD_PROJECT_ID }}
-#          version: '${{ github.sha }}'
-#          promote: true
+
+
+      - name: Deploy to App Engine
+        uses: google-github-actions/deploy-appengine@v1
+        env:
+          DB_PORT: ${{ secrets.DB_PORT }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_HOSTNAME: ${{ secrets.DB_HOSTNAME }}
+          DB_INSTANCE_NAME: ${{ secrets.DB_INSTANCE_NAME }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          CLOUDSDK_APP_CLOUD_BUILD_TIMEOUT: 1800
+        with:
+          project_id: ${{ secrets.GCLOUD_PROJECT_ID }}
+          deliverables: app.yaml
+          version: v1
+          credentials: ${{ secrets.GCP_SA_KEY }}
