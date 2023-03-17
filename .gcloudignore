@@ -5,3 +5,6 @@ gradlew
 gradle/
 gradlew.bat
 build
+pre-push
+docker*
+Dockerfile
