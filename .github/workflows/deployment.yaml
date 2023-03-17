@@ -46,6 +46,7 @@ jobs:
 
       - name: Deploy app
         run: |
+          gcloud --version &&
           gcloud config list &&
           gcloud app deploy --quiet --project ${{ secrets.GCLOUD_PROJECT_ID }} --verbosity=debug
 #       gcloud config set ${{ secrets.GCLOUD_PROJECT_ID }} &&
